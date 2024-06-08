@@ -1,15 +1,13 @@
 # OSGT
 Open Source Government Tools
 
-
-
-
-
 # Modules
-**In no specific order**
+*In no specific order*
 
 ## Core Modules:
 
+## Admin
+  User Administartion and Module Deployment
 ### Permit
   Issue Premits or licenses
 ### Agenda
