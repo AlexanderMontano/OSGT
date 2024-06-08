@@ -14,7 +14,8 @@ Open Source Government Tools
   Build Agendas
 ### Meeting
   Manage Meeting Documents and Media
-
+### Portal
+  Build Public Access Portals
 ## Support Modules:
 
 ### Land
@@ -29,4 +30,9 @@ Open Source Government Tools
   In-Person Services Queue
 ### Inspection
   Manage Inspections
-
+### Forms
+  Information intake
+### Contacts
+  Manage Contacts
+### Notify
+  Email and SMS Notifications
