@@ -8,27 +8,27 @@ Open Source Government Tools
 # Modules
 **In no specific order**
 
-Core Modules:
+##Core Modules:
 
-Permit
+###Permit
   Issue Premits or licenses
-Agenda
+###Agenda
   Build Agendas
-Meeting
+###Meeting
   Manage Meeting Documents and Media
 
-Support Modules:
+##Support Modules:
 
-Land
+###Land
   Connect With GIS Information
-Workflow
+###Workflow
   Execute a Workflow
-Payment
+###Payment
   Take a Payment
-Document
-  Save a Document
-Queue
+###Document
+  Save and Retrieve Documents
+###Queue
   In-Person Services Queue
-Inspection
+###Inspection
   Manage Inspections
 
