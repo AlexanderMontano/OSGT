@@ -1,0 +1,22 @@
+{
+    "name": "osgt",
+    "main": "index.js",
+    "dependencies": {
+        "@pulumi/aws": "^6.0.0",
+        "@pulumi/awsx": "^2.0.2",
+        "@pulumi/pulumi": "^3.0.0",
+        "@pulumi/synced-folder": "^0.11.1"
+    },
+    "version": "1.0.0",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "deploy": "pulumi up --yes",
+        "syncPublic":"aws s3 sync ../public/ s3://$(pulumi stack output PublicBucket)",
+        "clearPublic":"aws s3 rm s3://$(pulumi stack output PublicBucket) --recursive",
+        "destroy":"pulumi down --yes"
+    },
+    "keywords": [],
+    "author": "Alex Montano",
+    "license": "GPL",
+    "description": ""
+}

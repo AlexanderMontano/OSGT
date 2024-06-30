@@ -7,7 +7,7 @@ Open Source Government Tools
 ## Core Modules:
 
 ## Admin
-  User Administartion and Module Deployment
+  User Administartion, Authentication, and Module Deployment
 ### Permit
   Issue Premits or licenses
 ### Agenda
