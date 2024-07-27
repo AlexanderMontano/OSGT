@@ -36,3 +36,13 @@ Open Source Government Tools
   Manage Contacts
 ### Notify
   Email and SMS Notifications
+
+# Installation:
+
+## Prerequisites
+  
+  Node.js v16 or heigher.
+  AWS account
+  Pulumi
+
+## 

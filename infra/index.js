@@ -2,7 +2,6 @@
 const pulumi = require("@pulumi/pulumi");
 const aws = require("@pulumi/aws");
 const awsx = require("@pulumi/awsx");
-const synced = require("@pulumi/synced-folder");
 
 const config = new pulumi.Config("aws");
 const providerOpts = { provider: new aws.Provider("prov", { region: "us-west-2" }) };
@@ -286,7 +285,7 @@ const adminLambda = new aws.lambda.Function("adminLambda", {
         },
     }},{
     dependsOn:[
-    iam1,iam2,iam3,iam4,iam5,iam5,privateSubnet,adminApi]
+    iam1,iam2,iam3,iam4,iam5,iam5,privateSubnet,adminApi,nat]
 });
 const adminLambdaPermission = new aws.lambda.Permission("adminLambdaPermission", {
   action: "lambda:InvokeFunction",
@@ -334,19 +333,26 @@ const stage = new aws.apigatewayv2.Stage("osgtDevStage", {
 //public Folder
 
 const osgtPublicBucket = new aws.s3.BucketV2("osgtPublicBucket", {
-    website: {
-        indexDocument: "index.html",
-        errorDocument: "error.html",
-        routingRules: `[{
-    "Condition": {
-        "KeyPrefixEquals": "js/"
+
+});
+const osgtPublicBucketWebsiteConfiguration = new aws.s3.BucketWebsiteConfigurationV2("osgtPublicBucketWebsiteConfiguration", {
+    bucket: osgtPublicBucket.id,
+    indexDocument: {
+        suffix: "index.html",
     },
-    "Redirect": {
-        "ReplaceKeyPrefixWith": "static/"
-    }
-}]
-`,
-    }
+    errorDocument: {
+        key: "error.html",
+    },
+    routingRules: [{
+        condition: {
+            keyPrefixEquals: "docs/",
+        },
+        redirect: {
+            replaceKeyPrefixWith: "documents/",
+        },
+    }],
+},{
+    dependsOn: [osgtPublicBucket],
 });
 
 const osgtPublicBucketPublicAccessBlock = new aws.s3.BucketPublicAccessBlock("osgtPublicBucketPublicAccessBlock", {
@@ -379,8 +385,9 @@ const allowAccessosgtPublicBucketPolicy = new aws.s3.BucketPolicy("allowAccessos
 },{
     dependsOn: [osgtPublicBucketPublicAccessBlock],
 });
-
 module.exports= { 
     apiUrl:stage.invokeUrl,
     PublicBucket:osgtPublicBucket.bucket,
+    ElasticIp:eIP.publicIp,
+    Url: pulumi.interpolate`http://${osgtPublicBucketWebsiteConfiguration.websiteEndpoint}`
 }
